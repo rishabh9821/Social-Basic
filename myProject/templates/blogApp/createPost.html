@@ -1,0 +1,21 @@
+{% extends 'blogApp/base.html' %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        {% if form.instance.pk %}
+            <h2>Update Post</h2>
+        {% else %}
+            <h2>Create Post</h2>
+        {% endif %}
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" class="btn btn-warning" value="Post">
+    </form>
+    
+
+
+{% endblock %}

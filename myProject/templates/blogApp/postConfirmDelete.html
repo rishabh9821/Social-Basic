@@ -1,0 +1,15 @@
+{% extends 'blogApp/base.html' %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        <h2>
+            Confirm Delete
+        </h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" value="Delete Post" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

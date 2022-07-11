@@ -1,0 +1,38 @@
+{% extends 'blogApp/base.html' %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        <h1>
+            {{ post.title }}
+        </h1> 
+        <h3>By {{post.author}} on {{ post.createdDate }}</h3>
+    </div>
+    <div class="container">
+        {{ post.text }}
+    </div>
+    <div class="container">
+        <button class="btn btn-primary"><a href="{% url 'blogApp:post-update' post_pk=post.pk %}">Update Post</a></button>
+        <button class="btn btn-primary"><a href="{% url 'blogApp:post-delete' post_pk=post.pk %}">Delete Post</a></button>
+    </div>
+
+    <div class="container">
+        <h1>Comments:</h1>
+        <h4>Add your own comment:</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Post Comment">
+        </form>
+    </div>
+
+    <div>
+        {% for comment in post.comments.all %}
+            <div class="container">
+                <p>
+                    {{ comment.text }}
+                </p>
+                <h8> By: {{ comment.author }}</h8>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
